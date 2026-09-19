@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmarina- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/19 18:26:14 by mmarina-          #+#    #+#             */
+/*   Updated: 2026/09/19 18:26:16 by mmarina-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>//para malloc y free
 #include "libft/libft.h"
 #include "ft_printf.h"
@@ -9,10 +21,6 @@ static int	number_length(long int n)
 
 	len = 0;
 	n_aux = n;
-	/// se podria borrar
-	// if (n_aux < 0)
-	// 	n_aux = -n_aux;
-	/// hasta aqui
 	if (n_aux == 0)
 		return (1);
 	while (n_aux != 0)
@@ -41,21 +49,9 @@ char	*ft_uitoa(long int n)
 	n_aux = n;
 	i = 0;
 	len = number_length(n_aux);
-	///se podria borrar
-	// if (n_aux < 0)
-	// 	len++;
-	/// hasta aqui
 	str_num = malloc ((len + 1) * sizeof(char));
 	if (!str_num)
 		return (NULL);
-	/// se podria borrar
-	// if (n_aux < 0)
-	// {
-	// 	str_num[i] = '-';
-	// 	i++;
-	// 	n_aux = -n_aux;
-	// }
-	/// hasta aqui
 	if (n_aux == 0)
 		str_num[i] = '0';
 	if (i < len && n_aux != 0)

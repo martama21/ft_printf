@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmarina- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/19 18:22:25 by mmarina-          #+#    #+#             */
+/*   Updated: 2026/09/19 18:22:27 by mmarina-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
-#define FT_PRINTF_H
-#include <stddef.h>//para el size_t
+# define FT_PRINTF_H
+# include <stddef.h>//para el size_t
 
 char	*ft_uitoa(long int n);
 
