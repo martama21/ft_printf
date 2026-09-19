@@ -18,163 +18,6 @@
 #include <stdint.h>// para uintptr_t
 #include <stdlib.h>//para malloc y free
 
-
-//FUNCION PARA ft_printf_hexadecimal.c
-// char	hexadigit(int d)
-// {
-// 	char	c;
-
-// 	if (d == 10)
-// 		c = 'a';
-// 	else if (d == 11)
-// 		c = 'b';
-// 	else if (d == 12)
-// 		c = 'c';
-// 	else if (d == 13)
-// 		c = 'd';
-// 	else if (d == 14)
-// 		c = 'e';
-// 	else if (d == 15)
-// 		c = 'f';
-// 	else if (d < 10)
-// 		c = (char)(d + 48);
-// 	return (c);
-// }
-
-
-//FUNCION PARA ft_printf_hexadecimal.c
-// void	put_hexadecimal(unsigned long long n)
-// {
-// 	if (n >= 16)
-// 	{
-// 		put_hexadecimal(n / 16);
-// 		put_hexadecimal(n % 16);
-// 	}
-// 	else
-// 		ft_putchar_fd(hexadigit(n), 1);
-// }
-
-//FUNCION PARA ft_printf_hexadecimal.c
-// int	format_p(void *p)
-// {
-// 	uintptr_t	dir;
-// 	int			len;
-
-// 	dir = (uintptr_t)p;
-// 	len = 0;
-// 	if (dir == 0)
-// 	{
-// 		ft_putstr_fd("(nil)", 1);
-// 		len = 5;
-// 	}
-// 	else
-// 	{
-// 		ft_putstr_fd("0x", 1);
-// 		len += 2;
-// 		put_hexadecimal((unsigned long long)dir);
-// 		while (dir != 0)
-// 		{
-// 			len++;
-// 			dir = dir / 16;
-// 		}
-// 	}
-// 	return (len);
-// }
-
-int	format_c(va_list arg)
-{
-	ft_putchar_fd(va_arg(arg, int), 1);
-	return (1);
-}
-
-int	format_s(va_list arg)
-{
-	char	*str;
-
-	str = ft_strdup(va_arg(arg, char *));
-	ft_putstr_fd(str, 1);
-	return (ft_strlen(str));
-}
-
-int	format_d(va_list arg)
-{
-	int	d;
-
-	d = va_arg(arg, int);
-	ft_putnbr_fd(d, 1);
-	return (ft_strlen(ft_itoa(d)));
-}
-
-int	format_u(va_list arg)
-{
-	long int	d;
-	char		*str_num;
-	int			len;
-
-	d = va_arg(arg, int);
-	if (d < 0)
-	{
-		d = 4294967296 + d;
-		str_num = ft_uitoa(d);
-		ft_putstr_fd(str_num, 1);
-		len = ft_strlen(str_num);
-		free(str_num);
-		return (len);
-	}
-	else
-		ft_putnbr_fd((unsigned int)d, 1);
-	return (ft_strlen(ft_itoa(d)));
-}
-
-//FUNCION PARA ft_printf_hexadecimal.c
-// int	format_x(va_list arg)
-// {
-// 	long int	hex;
-// 	int			len;
-
-// 	len = 0;
-// 	hex = va_arg(arg, unsigned int);
-// 	put_hexadecimal(hex);
-// 	while (hex != 0)
-// 	{
-// 		len++;
-// 		hex = hex / 16;
-// 	}
-// 	return (len);
-// }
-
-//FUNCION PARA ft_printf_hexadecimal.c
-// void	put_hexadecimal_capital(unsigned long long n)
-// {
-// 	if (n >= 16)
-// 	{
-// 		put_hexadecimal(n / 16);
-// 		put_hexadecimal(n % 16);
-// 	}
-// 	else
-// 		ft_putchar_fd(ft_toupper(hexadigit(n)), 1);
-// }
-
-//FUNCION PARA ft_printf_hexadecimal.c
-// int	format_x_capital(va_list arg)
-// {
-// 	long int	hex;
-// 	int			len;
-
-// 	len = 0;
-// 	hex = va_arg(arg, unsigned int);
-// 	put_hexadecimal_capital(hex);
-// 	while (hex != 0)
-// 	{
-// 		len++;
-// 		hex = hex / 16;
-// 	}
-// 	return (len);
-// }
-
-//////////////////////////// desde aqui FT_PRINTF.C
-
-
 int	check_conversions(char type, va_list arg)
 {
 	int	len;
@@ -277,36 +120,106 @@ int	ft_printf(char const *format, ...)
 	return (len_out);
 }
 
-int	main(void)
-{
-	int				len;
-	char			*d = "1237";
-	int				dec;
-	unsigned int	hex;
+// int	main(void)
+// {
+// 	int				len;
+// 	char			str[] = {'J', 'U', 'A', 'N', 'A'};
+// 	char			*d = "1237";
+// 	int				dec;
+// 	unsigned int	hex;
 
-	hex = 0x7FFE3445;
-	dec = 1237;
-	len = ft_printf("MIOginal (str) : %p\n", d);
-	printf("len_printf2: %d\n", len);
-	printf("original (int)puntero: %p\n", &dec);
-	//*p_aux = &((unsigned char *)d);
-	//printf("original (char *)puntero (%p): %d\n", d, (int)p_aux);
-	len = printf("original (str) : %p\n", d);
-	printf("len_printf: %d\n", len);
-	len = printf("(p) original vacio: %p", NULL);
-	printf(" | len : %d\n", len);
-	len = ft_printf("(p) MIOginal vacio: %p", NULL);
-	printf(" | len : %d\n", len);
-	len = printf("(x) original : %x ", hex);
-	printf("| len: %d\n", len);
-	len = ft_printf("(x) MIOginal : %x ", hex);
-	printf("| len: %d\n", len);
-	len = printf("(X) original : %X ", hex);
-	printf("| len: %d\n", len);
-	len = ft_printf("(X) MIOginal : %X ", hex);
-	printf("| len: %d\n", len);
-	return (0);
-}
+// 	hex = 0x7FFE3445;
+// 	len = ft_printf("prueba MIOginal %ce%dntral%%r: 
+// %s %p %d ", 97, 343536, str, d, 0);
+// 	if (len < 0)
+// 		return (1);//nose si se tiene que cambiar la salida a salida de errores.
+// 	printf("| len: %d\n", len);
+// 	len = printf("prueba original %ce%dntral%%r: 
+// %s %p %d ", 97, 343536, str, d, 0);
+// 	printf("| len: %d\n", len);
+// 	printf("________________\n");
+// 	len = ft_printf("(c) MIOginal: %ciem%cre %cg%ca%c%c.%%", 
+// 's', 'p', 'i', 'u', 'l', '*');
+// 	printf(" | len: %d\n", len);
+// 	len = printf("(c) original: %ciem%cre %cg%ca%c%c.%%", 
+// 's', 'p', 'i', 'u', 'l', '*');
+// 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(s) MIOginal: %s %s%s.", 
+// "Todo eso", "que tanto", " nos gusta.");
+// 	printf(" | len: %d\n", len);
+// 	len = printf("(s) original: %s %s%s.", 
+// "Todo eso", "que tanto", " nos gusta.");
+// 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(d) (i) MIOginal: d:%d.i:%i", 456, -2763);
+// 	printf(" | len: %d\n", len);
+// 	len = printf("(d) (i) original: d:%d.i:%i", 456, -2763);
+// 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(u) MIOginal: -2:%u|2:%u|0:%u", -2, 2, 0);
+// 	printf(" | len: %d\n", len);
+// 	len = printf("(u) original: -2:%u|2:%u|0:%u", -2, 2, 0);
+// 	printf(" | len: %d\n", len);
+// 	printf("________________\n");
+// 	dec = 1237;
+// 	len = ft_printf("(p) MIOginal (str) : %p", d);
+// 	printf(" | len_printf: %d\n", len);
+// 	printf("original (int)puntero: %p\n", &dec);
+// 	//*p_aux = &((unsigned char *)d);
+// 	//printf("original (char *)puntero (%p): %d\n", d, (int)p_aux);
+// 	len = printf("original (str) : %p\n", d);
+// 	printf("len_printf: %d\n", len);
+// 	len = printf("(p) original vacio: %p", NULL);
+// 	printf(" | len : %d\n", len);
+// 	len = ft_printf("(p) MIOginal vacio: %p", NULL);
+// 	printf(" | len : %d\n", len);
+// 	printf("(d) original -2.5: %d\n", -5/2);
+// 	ft_printf("(d) MIOginal -2.5: %d\n", -5/2);
+// 	printf("(i) original -2.5: %i\n", -5/2);
+// 	len = printf("(u) original -2.5: %u ", -23846827);
+// 	printf("| len: %d\n", len);
+// 	len = ft_printf("(u) MIOginal -2.5: %u ", -23846827);
+// 	printf("| len: %d\n", len);
+// 	len = printf("(x) original : %x ", hex);
+// 	printf("| len: %d\n", len);
+// 	len = ft_printf("(x) MIOginal : %x ", hex);
+// 	printf("| len: %d\n", len);
+// 	len = printf("(X) original : %X ", hex);
+// 	printf("| len: %d\n", len);
+// 	len = ft_printf("(X) MIOginal : %X ", hex);
+// 	printf("| len: %d\n", len);
+// 	return (0);
+// }
+
+// //MAIN PARA PROBAR FORMATOS: %p, %x, %X
+// int	main(void)
+// {
+// 	int				len;
+// 	char			*d = "1237";
+// 	int				dec;
+// 	unsigned int	hex;
+
+// 	hex = 0x7FFE3445;
+// 	dec = 1237;
+// 	len = ft_printf("MIOginal (str) : %p\n", d);
+// 	printf("len_printf2: %d\n", len);
+// 	printf("original (int)puntero: %p\n", &dec);
+// 	//*p_aux = &((unsigned char *)d);
+// 	//printf("original (char *)puntero (%p): %d\n", d, (int)p_aux);
+// 	len = printf("original (str) : %p\n", d);
+// 	printf("len_printf: %d\n", len);
+// 	len = printf("(p) original vacio: %p", NULL);
+// 	printf(" | len : %d\n", len);
+// 	len = ft_printf("(p) MIOginal vacio: %p", NULL);
+// 	printf(" | len : %d\n", len);
+// 	len = printf("(x) original : %x ", hex);
+// 	printf("| len: %d\n", len);
+// 	len = ft_printf("(x) MIOginal : %x ", hex);
+// 	printf("| len: %d\n", len);
+// 	len = printf("(X) original : %X ", hex);
+// 	printf("| len: %d\n", len);
+// 	len = ft_printf("(X) MIOginal : %X ", hex);
+// 	printf("| len: %d\n", len);
+// 	return (0);
+// }
 
 // int	main(void)
 // {
@@ -328,8 +241,10 @@ int	main(void)
 // 	//c = (unsigned char *)ft_strdup("str_dup");
 
 // 	//d = 97;
-// 	//len = ft_printf("prueba MIA %ce%dntral%%r: %s %d %p", 97, 343536, str, 10, c);
-// 	len = ft_printf("prueba MIA %ce%dntral%%r: %s %p %d", 97, 343536, str, d, 0);
+// 	//len = ft_printf("prueba MIA %ce%dntral%%r: 
+// %s %d %p", 97, 343536, str, 10, c);
+// 	len = ft_printf("prueba MIA %ce%dntral%%r: 
+// %s %p %d", 97, 343536, str, d, 0);
 // 	if (len < 0)
 // 		return (1);//nose si se tiene que cambiar la salida a salida de errores.
 // 	printf("\nlen MIO: %d\n", len);

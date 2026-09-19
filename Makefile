@@ -10,7 +10,8 @@ RM = rm -rf
 # Mandatory sources
 SRC = 	ft_printf.c \
 		ft_uitoa.c \
-		ft_printf_hexadecimal.c
+		ft_printf_hexadecimal.c \
+		ft_printf_csdiu.c
 
 OBJ = $(SRC:.c=.o)
 
