@@ -13,6 +13,7 @@
 #include <stdlib.h>//para malloc y free
 #include "libft/libft.h"
 #include "ft_printf.h"
+//#include <stdarg.h>//para las macros _va_..
 
 static int	number_length(long int n)
 {

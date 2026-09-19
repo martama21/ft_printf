@@ -18,64 +18,68 @@
 #include <stdint.h>// para uintptr_t
 #include <stdlib.h>//para malloc y free
 
-char	hexadigit(int d)
-{
-	char	c;
 
-	if (d == 10)
-		c = 'a';
-	else if (d == 11)
-		c = 'b';
-	else if (d == 12)
-		c = 'c';
-	else if (d == 13)
-		c = 'd';
-	else if (d == 14)
-		c = 'e';
-	else if (d == 15)
-		c = 'f';
-	else if (d < 10)
-		c = (char)(d + 48);
-	return (c);
-}
+//FUNCION PARA ft_printf_hexadecimal.c
+// char	hexadigit(int d)
+// {
+// 	char	c;
 
-void	put_hexadecimal(unsigned long long n)
-{
-	if (n >= 16)
-	{
-		put_hexadecimal(n / 16);
-		put_hexadecimal(n % 16);
-	}
-	else
-		ft_putchar_fd(hexadigit(n), 1);
-}
+// 	if (d == 10)
+// 		c = 'a';
+// 	else if (d == 11)
+// 		c = 'b';
+// 	else if (d == 12)
+// 		c = 'c';
+// 	else if (d == 13)
+// 		c = 'd';
+// 	else if (d == 14)
+// 		c = 'e';
+// 	else if (d == 15)
+// 		c = 'f';
+// 	else if (d < 10)
+// 		c = (char)(d + 48);
+// 	return (c);
+// }
 
-// int conversion_p(void *p)
-int	format_p(void *p)
-{
-	uintptr_t	dir;
-	int			len;
 
-	dir = (uintptr_t)p;
-	len = 0;
-	if (dir == 0)
-	{
-		ft_putstr_fd("(nil)", 1);
-		len = 5;
-	}
-	else
-	{
-		ft_putstr_fd("0x", 1);
-		len += 2;
-		put_hexadecimal((unsigned long long)dir);
-		while (dir != 0)
-		{
-			len++;
-			dir = dir / 16;
-		}
-	}
-	return (len);
-}
+//FUNCION PARA ft_printf_hexadecimal.c
+// void	put_hexadecimal(unsigned long long n)
+// {
+// 	if (n >= 16)
+// 	{
+// 		put_hexadecimal(n / 16);
+// 		put_hexadecimal(n % 16);
+// 	}
+// 	else
+// 		ft_putchar_fd(hexadigit(n), 1);
+// }
+
+//FUNCION PARA ft_printf_hexadecimal.c
+// int	format_p(void *p)
+// {
+// 	uintptr_t	dir;
+// 	int			len;
+
+// 	dir = (uintptr_t)p;
+// 	len = 0;
+// 	if (dir == 0)
+// 	{
+// 		ft_putstr_fd("(nil)", 1);
+// 		len = 5;
+// 	}
+// 	else
+// 	{
+// 		ft_putstr_fd("0x", 1);
+// 		len += 2;
+// 		put_hexadecimal((unsigned long long)dir);
+// 		while (dir != 0)
+// 		{
+// 			len++;
+// 			dir = dir / 16;
+// 		}
+// 	}
+// 	return (len);
+// }
 
 int	format_c(va_list arg)
 {
@@ -122,48 +126,51 @@ int	format_u(va_list arg)
 	return (ft_strlen(ft_itoa(d)));
 }
 
-int	format_x(va_list arg)
-{
-	long int	hex;
-	int			len;
+//FUNCION PARA ft_printf_hexadecimal.c
+// int	format_x(va_list arg)
+// {
+// 	long int	hex;
+// 	int			len;
 
-	len = 0;
-	hex = va_arg(arg, unsigned int);
-	put_hexadecimal(hex);
-	while (hex != 0)
-	{
-		len++;
-		hex = hex / 16;
-	}
-	return (len);
-}
+// 	len = 0;
+// 	hex = va_arg(arg, unsigned int);
+// 	put_hexadecimal(hex);
+// 	while (hex != 0)
+// 	{
+// 		len++;
+// 		hex = hex / 16;
+// 	}
+// 	return (len);
+// }
 
-void	put_hexadecimal_capital(unsigned long long n)
-{
-	if (n >= 16)
-	{
-		put_hexadecimal(n / 16);
-		put_hexadecimal(n % 16);
-	}
-	else
-		ft_putchar_fd(ft_toupper(hexadigit(n)), 1);
-}
+//FUNCION PARA ft_printf_hexadecimal.c
+// void	put_hexadecimal_capital(unsigned long long n)
+// {
+// 	if (n >= 16)
+// 	{
+// 		put_hexadecimal(n / 16);
+// 		put_hexadecimal(n % 16);
+// 	}
+// 	else
+// 		ft_putchar_fd(ft_toupper(hexadigit(n)), 1);
+// }
 
-int	format_x_capital(va_list arg)
-{
-	long int	hex;
-	int			len;
+//FUNCION PARA ft_printf_hexadecimal.c
+// int	format_x_capital(va_list arg)
+// {
+// 	long int	hex;
+// 	int			len;
 
-	len = 0;
-	hex = va_arg(arg, unsigned int);
-	put_hexadecimal_capital(hex);
-	while (hex != 0)
-	{
-		len++;
-		hex = hex / 16;
-	}
-	return (len);
-}
+// 	len = 0;
+// 	hex = va_arg(arg, unsigned int);
+// 	put_hexadecimal_capital(hex);
+// 	while (hex != 0)
+// 	{
+// 		len++;
+// 		hex = hex / 16;
+// 	}
+// 	return (len);
+// }
 
 //////////////////////////// desde aqui FT_PRINTF.C
 
@@ -268,6 +275,37 @@ int	ft_printf(char const *format, ...)
 	do_conversions((char *)format, arg_ptr, &len_out);
 	va_end(arg_ptr);
 	return (len_out);
+}
+
+int	main(void)
+{
+	int				len;
+	char			*d = "1237";
+	int				dec;
+	unsigned int	hex;
+
+	hex = 0x7FFE3445;
+	dec = 1237;
+	len = ft_printf("MIOginal (str) : %p\n", d);
+	printf("len_printf2: %d\n", len);
+	printf("original (int)puntero: %p\n", &dec);
+	//*p_aux = &((unsigned char *)d);
+	//printf("original (char *)puntero (%p): %d\n", d, (int)p_aux);
+	len = printf("original (str) : %p\n", d);
+	printf("len_printf: %d\n", len);
+	len = printf("(p) original vacio: %p", NULL);
+	printf(" | len : %d\n", len);
+	len = ft_printf("(p) MIOginal vacio: %p", NULL);
+	printf(" | len : %d\n", len);
+	len = printf("(x) original : %x ", hex);
+	printf("| len: %d\n", len);
+	len = ft_printf("(x) MIOginal : %x ", hex);
+	printf("| len: %d\n", len);
+	len = printf("(X) original : %X ", hex);
+	printf("| len: %d\n", len);
+	len = ft_printf("(X) MIOginal : %X ", hex);
+	printf("| len: %d\n", len);
+	return (0);
 }
 
 // int	main(void)

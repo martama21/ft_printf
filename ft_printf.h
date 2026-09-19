@@ -13,7 +13,11 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stddef.h>//para el size_t
+#include <stdarg.h>//para las macros _va_...
 
-char	*ft_uitoa(long int n);
+char	*ft_uitoa(long int n);//en ft_uitoa.c
+int	format_p(void *p);//en ft_printf_hexadecimal.c
+int	format_x(va_list arg);//en ft_printf_hexadecimal.c
+int	format_x_capital(va_list arg);//en ft_printf_hexadecimal.c
 
 #endif
