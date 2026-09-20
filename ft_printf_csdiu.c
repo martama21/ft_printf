@@ -25,26 +25,36 @@ int	format_c(va_list arg)
 int	format_s(va_list arg)
 {
 	char	*str;
+	int		len;
 
 	str = ft_strdup(va_arg(arg, char *));
+	len = ft_strlen(str);
 	ft_putstr_fd(str, 1);
-	return (ft_strlen(str));
+	free(str);
+	return (len);
 }
 
 int	format_d(va_list arg)
 {
-	int	d;
+	int		d;
+	char	*str_num;
+	int		len;
 
 	d = va_arg(arg, int);
 	ft_putnbr_fd(d, 1);
-	return (ft_strlen(ft_itoa(d)));
+	str_num = ft_itoa(d);
+	len = ft_strlen(str_num);
+	free(str_num);
+	return (len);
 }
 
 int	format_u(va_list arg)
 {
 	long int	d;
 	char		*str_num;
+	char		*str_num2;
 	int			len;
+	int			len2;
 
 	d = va_arg(arg, int);
 	if (d < 0)
@@ -58,5 +68,8 @@ int	format_u(va_list arg)
 	}
 	else
 		ft_putnbr_fd((unsigned int)d, 1);
-	return (ft_strlen(ft_itoa(d)));
+	str_num2 = ft_itoa(d);
+	len2 = ft_strlen(str_num2);
+	free(str_num2);
+	return (len2);
 }

@@ -129,17 +129,17 @@ int	ft_printf(char const *format, ...)
 // 	unsigned int	hex;
 
 // 	hex = 0x7FFE3445;
-// 	len = ft_printf("prueba MIOginal %ce%dntral%%r: 
+// 	len = ft_printf("prueba MIOginal %ce%dntral%%r:
 // %s %p %d ", 97, 343536, str, d, 0);
 // 	if (len < 0)
 // 		return (1);//nose si se tiene que cambiar la salida a salida de errores.
 // 	printf("| len: %d\n", len);
-// 	len = printf("prueba original %ce%dntral%%r: 
+// 	len = printf("prueba original %ce%dntral%%r:
 // %s %p %d ", 97, 343536, str, d, 0);
 // 	printf("| len: %d\n", len);
 // 	printf("________________\n");
 // 	len = ft_printf("(c) MIOginal: %ciem%cre %cg%ca%c%c.%%", 
-// 's', 'p', 'i', 'u', 'l', '*');
+// 		's', 'p', 'i', 'u', 'l', '*');
 // 	printf(" | len: %d\n", len);
 // 	len = printf("(c) original: %ciem%cre %cg%ca%c%c.%%", 
 // 's', 'p', 'i', 'u', 'l', '*');
