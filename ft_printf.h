@@ -23,5 +23,10 @@ int		format_c(va_list arg);//en ft_printf_csdiu.c
 int		format_s(va_list arg);//en ft_printf_csdiu.c
 int		format_d(va_list arg);//en ft_printf_csdiu.c
 int		format_u(va_list arg);//en ft_printf_csdiu.c
+int		check_conversions(char type, va_list arg);//en ft_printf.c
+int		len_without_conversions(char *format);
+int		do_conversions(char *format, va_list arg_ptr, int *length_out);
+int		good_conversions(char *str);
+int		ft_printf(char const *format, ...);
 
 #endif

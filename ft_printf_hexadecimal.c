@@ -73,14 +73,31 @@ int	format_p(void *p)
 	return (len);
 }
 
+// int	format_x(va_list arg)
+// {
+// 	long int	hex;
+// 	int			len;
+
+// 	len = 0;
+// 	hex = va_arg(arg, unsigned int);
+// 	put_hexadecimal(hex, &ft_tolower);
+// 	while (hex != 0)
+// 	{
+// 		len++;
+// 		hex = hex / 16;
+// 	}
+// 	return (len);
+// }
 int	format_x(va_list arg)
 {
-	long int	hex;
-	int			len;
+	unsigned int	hex;
+	int				len;
 
 	len = 0;
 	hex = va_arg(arg, unsigned int);
 	put_hexadecimal(hex, &ft_tolower);
+	if (hex == 0)
+		return (1);
 	while (hex != 0)
 	{
 		len++;
@@ -89,14 +106,31 @@ int	format_x(va_list arg)
 	return (len);
 }
 
+// int	format_x_capital(va_list arg)
+// {
+// 	long int	hex;
+// 	int			len;
+
+// 	len = 0;
+// 	hex = va_arg(arg, unsigned int);
+// 	put_hexadecimal(hex, &ft_toupper);
+// 	while (hex != 0)
+// 	{
+// 		len++;
+// 		hex = hex / 16;
+// 	}
+// 	return (len);
+// }
 int	format_x_capital(va_list arg)
 {
-	long int	hex;
-	int			len;
+	unsigned int	hex;
+	int				len;
 
 	len = 0;
 	hex = va_arg(arg, unsigned int);
 	put_hexadecimal(hex, &ft_toupper);
+	if (hex == 0)
+		return (1);
 	while (hex != 0)
 	{
 		len++;

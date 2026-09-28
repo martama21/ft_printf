@@ -15,6 +15,8 @@ SRC = 	ft_printf.c \
 
 OBJ = $(SRC:.c=.o)
 
+LIBFT_OBJ = $(wildcard $(LIBFT_DIR)*.o)
+
 # Default (mandatory)
 all: compile_libft $(NAME)
 
@@ -22,6 +24,7 @@ compile_libft:
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ)
+	cp $(LIBFT_DIR)libft.a $(NAME)
 	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c ft_printf.h
