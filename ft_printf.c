@@ -125,10 +125,11 @@ int	ft_printf(char const *format, ...)
 // 	int				len;
 // 	char			str[] = {'J', 'U', 'A', 'N', 'A'};
 // 	char			*d = "1237";
-// 	int				dec;
 // 	unsigned int	hex;
+// 	int				x;
+// 	void			*ptr = &x;
+// 	char			*str2;
 
-// 	hex = 0x7FFE3445;
 // 	len = ft_printf("prueba MIOginal %ce%dntral%%r:
 // %s %p %d ", 97, 343536, str, d, 0);
 // 	if (len < 0)
@@ -138,39 +139,79 @@ int	ft_printf(char const *format, ...)
 // %s %p %d ", 97, 343536, str, d, 0);
 // 	printf("| len: %d\n", len);
 // 	printf("________________\n");
-// 	len = ft_printf("(c) MIOginal: %ciem%cre %cg%ca%c%c.%%", 
-// 		's', 'p', 'i', 'u', 'l', '*');
+// 	printf("PRUEBAS ESPECEFICADOR *%%c*:\n");
+// 	len = ft_printf("(c) MIOginal: %ciem%cre 
+// %cg%ca%c%c.%%", 's', 'p', 'i', 'u', 'l', '*');
 // 	printf(" | len: %d\n", len);
-// 	len = printf("(c) original: %ciem%cre %cg%ca%c%c.%%", 
-// 's', 'p', 'i', 'u', 'l', '*');
+// 	len = printf("(c) original: %ciem%cre 
+// %cg%ca%c%c.%%", 's', 'p', 'i', 'u', 'l', '*');
 // 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(c) MIOginal (int): %c", 35);
+// 	printf(" | len: %d\n", len);
+// 	len = printf("(c) original (int): %c", 35);
+// 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(c) MIOginal (NUL): %c", '\0');
+// 	printf(" | len: %d\n", len);
+// 	len = printf("(c) original (NUL): %c", '\0');
+// 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(c) MIOginal (nothin): %c");
+// 	printf(" | len: %d\n", len);
+// 	// len = printf("(c) original (nothing): %c");//error compilacion
+// 	// printf(" | len: %d\n", len);
+// 	printf("________________\n");
+// 	printf("PRUEBAS ESPECEFICADOR *%%s*:\n");
 // 	len = ft_printf("(s) MIOginal: %s %s%s.", 
-// "Todo eso", "que tanto", " nos gusta.");
+// "Probando", "varios", " strs juntos.");
 // 	printf(" | len: %d\n", len);
 // 	len = printf("(s) original: %s %s%s.", 
-// "Todo eso", "que tanto", " nos gusta.");
+// "Probando", "varios", " strs juntos.");
 // 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(s) MIOginal (NULL): %s.", NULL);
+// 	printf(" | len: %d\n", len);
+// 	// len = printf("(s) original (NULL): %s.", NULL);//ERROR COMPILACION
+// 	// printf(" | len: %d\n", len);
+// 	// len = ft_printf("(s) MIOginal (int): %s.", 6);//ERROR EJECUCION
+// 	// printf(" | len: %d\n", len);
+// 	printf("________________\n");
+// 	printf("PRUEBAS ESPECEFICADORES *%%d* e *%%i*:\n");
 // 	len = ft_printf("(d) (i) MIOginal: d:%d.i:%i", 456, -2763);
 // 	printf(" | len: %d\n", len);
 // 	len = printf("(d) (i) original: d:%d.i:%i", 456, -2763);
 // 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(d) (i) MIOginal (NULL): d:%d.", NULL);
+// 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(d) (i) MIOginal (nothing): d:%d.");
+// 	printf(" | len: %d\n", len);
+// 	printf("________________\n");
+// 	printf("PRUEBAS ESPECEFICADOR *%%u*:\n");
 // 	len = ft_printf("(u) MIOginal: -2:%u|2:%u|0:%u", -2, 2, 0);
 // 	printf(" | len: %d\n", len);
 // 	len = printf("(u) original: -2:%u|2:%u|0:%u", -2, 2, 0);
 // 	printf(" | len: %d\n", len);
 // 	printf("________________\n");
-// 	dec = 1237;
-// 	len = ft_printf("(p) MIOginal (str) : %p", d);
+// 	printf("PRUEBAS ESPECEFICADOR *%%p*:\n");
+// 	len = ft_printf("(p) MIOginal: %p", ptr);
+// 	printf(" | len: %d\n", len);
+// 	len = printf("(p) original: %p", ptr);
+// 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(p) MIOginal (NULL) : %p", NULL);
+// 	printf(" | len: %d\n", len);
+// 	len = printf("(p) original (NULL) : %p", NULL);
+// 	printf(" | len: %d\n", len);
+// 	str2 = "1237";
+// 	len = ft_printf("(p) MIOginal (str) : %p", str2);
+// 	printf(" | len: %d\n", len);
+// 	len = printf("(p) original (str) : %p", str2);
+// 	printf(" | len: %d\n", len);
+// 	len = ft_printf("(p) MIOginal (nothing) : %p");
+// 	printf(" | len: %d\n", len);
+// 	//len = printf("(p) original (nothing) : %p");//error de compilacion
+// 	//printf(" | len_printf: %d\n", len);
+// 	len = ft_printf("(p) MIOginal (char) : %p", 'f');
 // 	printf(" | len_printf: %d\n", len);
-// 	printf("original (int)puntero: %p\n", &dec);
-// 	//*p_aux = &((unsigned char *)d);
-// 	//printf("original (char *)puntero (%p): %d\n", d, (int)p_aux);
-// 	len = printf("original (str) : %p\n", d);
-// 	printf("len_printf: %d\n", len);
-// 	len = printf("(p) original vacio: %p", NULL);
-// 	printf(" | len : %d\n", len);
-// 	len = ft_printf("(p) MIOginal vacio: %p", NULL);
-// 	printf(" | len : %d\n", len);
+// 	// len = printf("(p) original (char) : %p" ,'f');//error de compilacion
+// 	// printf(" | len_printf: %d\n", len);
+// 	printf("________________\n");
 // 	printf("(d) original -2.5: %d\n", -5/2);
 // 	ft_printf("(d) MIOginal -2.5: %d\n", -5/2);
 // 	printf("(i) original -2.5: %i\n", -5/2);
@@ -178,6 +219,9 @@ int	ft_printf(char const *format, ...)
 // 	printf("| len: %d\n", len);
 // 	len = ft_printf("(u) MIOginal -2.5: %u ", -23846827);
 // 	printf("| len: %d\n", len);
+// 	printf("________________\n");
+// 	printf("PRUEBAS ESPECEFICADORES *%%x* y *%%X*:\n");
+// 	hex = 0x7FFE3445;
 // 	len = printf("(x) original : %x ", hex);
 // 	printf("| len: %d\n", len);
 // 	len = ft_printf("(x) MIOginal : %x ", hex);
@@ -185,6 +229,14 @@ int	ft_printf(char const *format, ...)
 // 	len = printf("(X) original : %X ", hex);
 // 	printf("| len: %d\n", len);
 // 	len = ft_printf("(X) MIOginal : %X ", hex);
+// 	printf("| len: %d\n", len);
+// 	len = printf("(x) original (0): %x ", 0);
+// 	printf("| len: %d\n", len);
+// 	len = ft_printf("(x) MIOginal (0): %x ", 0);
+// 	printf("| len: %d\n", len);
+// 	len = printf("(X) original (25): %X ", 25);
+// 	printf("| len: %d\n", len);
+// 	len = ft_printf("(X) MIOginal (25): %X ", 25);
 // 	printf("| len: %d\n", len);
 // 	return (0);
 // }

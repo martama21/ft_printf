@@ -36,7 +36,7 @@ static char	hexadigit(int d)
 	return (c);
 }
 
-static void	put_hexadecimal(unsigned long long n, int (*f)(int c))
+static void	put_hexadecimal(uintptr_t n, int (*f)(int c))
 {
 	if (n >= 16)
 	{
@@ -54,7 +54,7 @@ int	format_p(void *p)
 
 	dir = (uintptr_t)p;
 	len = 0;
-	if (dir == 0)
+	if (!dir)
 	{
 		ft_putstr_fd("(nil)", 1);
 		len = 5;
@@ -63,7 +63,7 @@ int	format_p(void *p)
 	{
 		ft_putstr_fd("0x", 1);
 		len += 2;
-		put_hexadecimal((unsigned long long)dir, &ft_tolower);
+		put_hexadecimal(dir, &ft_tolower);
 		while (dir != 0)
 		{
 			len++;
@@ -73,21 +73,6 @@ int	format_p(void *p)
 	return (len);
 }
 
-// int	format_x(va_list arg)
-// {
-// 	long int	hex;
-// 	int			len;
-
-// 	len = 0;
-// 	hex = va_arg(arg, unsigned int);
-// 	put_hexadecimal(hex, &ft_tolower);
-// 	while (hex != 0)
-// 	{
-// 		len++;
-// 		hex = hex / 16;
-// 	}
-// 	return (len);
-// }
 int	format_x(va_list arg)
 {
 	unsigned int	hex;
@@ -106,21 +91,6 @@ int	format_x(va_list arg)
 	return (len);
 }
 
-// int	format_x_capital(va_list arg)
-// {
-// 	long int	hex;
-// 	int			len;
-
-// 	len = 0;
-// 	hex = va_arg(arg, unsigned int);
-// 	put_hexadecimal(hex, &ft_toupper);
-// 	while (hex != 0)
-// 	{
-// 		len++;
-// 		hex = hex / 16;
-// 	}
-// 	return (len);
-// }
 int	format_x_capital(va_list arg)
 {
 	unsigned int	hex;

@@ -3,21 +3,18 @@ _Este proyecto ha sido creado como parte del currículo de 42 por mmarina-._
 ## Descripción
 
 En este proyecto se trata de replicar el funcionamiento de la función original de _stdio_ **printf**, que se encarga de imprimir un mensaje por pantalla utilizando una cadena de formato que se le pasa como argumento.
-En este caso, solo se implmentan las siguientes conversiones:
+En este caso, solo se implementan las siguientes conversiones:
 - **%c**
 	
 	Imprime un sólo caracter.
-	<font color="red">No sé si en caso de no pasarle ningún argumento debería de controlar el posible error. ¿¿¿Este posible error podría ser un segmentation fault por caso de acceder a partes de la memoria a las que no puedo acceder??.</font>
 
 - **%s**
 	
 	Imprime una cadena de caracteres como se define por defecto en C, es decir, teniendo en cuenta que la cadena acaba en el carácter nulo (**\0**). Por tanto, si la cadena pasada como argumento, no acaba en el carácter nulo, la función _ft_printf_ seguirá intentando imprimir caracteres que no se le han pasado, pudiendo dar errores en tiempo de ejecución, que no se van a controlar en esta versión de la función, ya que da por echo que la cadena acabará con el carácter nulo.
 
-	<font color="red">DUDITA: Esta conversión hace uso de otra función que es _ft_strdup_ que a su vez hace uso de las funciones _malloc_ y _free_. ¿¿PARA ESTE CASO TENGO QUE CONTROLAR DE ALGUNA MANERA LOS MALLOCS Y FREES???</font>
-
 - **%p**
 
-	Al utilizar este formato, se le pasa como argumento un puntero **void \***, y la función en este caso imprimirá la dirección a la que apunta ese puntero en formato hexadecimal. En caso de que el puntero sea a _NULL_ se imprimirá _(nil)_.
+	Al utilizar este formato, se le pasa como argumento el contenido de un puntero **void \***, y la función en este caso imprimirá esa dirección en formato hexadecimal. En caso de que el puntero sea a _NULL_ se imprimirá _(nil)_.
 
 - **%d**
 
@@ -90,7 +87,7 @@ Todo esto significa, que el programador de esta versión _ft_printf_ **no tiene 
 
 #### va_start, va_arg, va_copy y va_end
 
-Ya se ha mencionado brevemente que para acceder a los argumentos adicionales que se le pasan a la función se han utilizado las macros _va_start_, _va_arg_, _va_copy_ y _va_end_. En esta secciñon se explicará un poco más en detalle para qué sirve cada una y para ello se explicará también el tipo _va_list_, necesario para el funcionamiento de la función. 
+Ya se ha mencionado brevemente que para acceder a los argumentos adicionales que se le pasan a la función se han utilizado las macros _va_start_, _va_arg_, _va_copy_ y _va_end_. En esta sección se explicará un poco más en detalle para qué sirve cada una y para ello se explicará también el tipo _va_list_, necesario para el funcionamiento de la función. 
 
 **(Paréntesis: ¿Qué es una macro?)**
 
@@ -108,8 +105,7 @@ Para el funcionamiento de _ft_printf_ se recorre el argumento _format_ y se va i
 
 
 ## Instrucciones
-- :::
-	:::
+
 - Creación de archivo ejecutable
 	Después de haber hecho el make y haber creado la librería estática _libftprintf.a_ y la _libft.a_ (dentro del directorio _libft/_), podemos crear el ejecutable mediante el siguiente comando: **cc -Wall -Wextra -Werror -g libftprintf.a libft/libft.a**. De esta manera se nos generará un ejecutable, llamado por defecto _a.out_, para ejecutarlo simplemente usaríamos el comando **./a.out**.
 

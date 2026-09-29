@@ -22,17 +22,6 @@ int	format_c(va_list arg)
 	return (1);
 }
 
-// int	format_s(va_list arg)
-// {
-// 	char	*str;
-// 	int		len;
-
-// 	str = ft_strdup(va_arg(arg, char *));
-// 	len = ft_strlen(str);
-// 	ft_putstr_fd(str, 1);
-// 	free(str);
-// 	return (len);
-// }
 int	format_s(va_list arg)
 {
 	char	*str;
