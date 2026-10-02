@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+// #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdlib.h>//para malloc y free
-#include <stdarg.h>//para las macros de _va_..
-//#include <stdint.h>// para uintptr_t
+// #include <stdlib.h>//para malloc y free
+// #include <stdarg.h>//para las macros de _va_..
+// //#include <stdint.h>// para uintptr_t
 
 int	format_c(va_list arg)
 {
@@ -36,13 +36,25 @@ int	format_s(va_list arg)
 	return (ft_strlen(str));
 }
 
-int	format_d(va_list arg)
+// int	format_d(va_list arg)
+// {
+// 	int		d;
+// 	char	*str_num;
+// 	int		len;
+
+// 	d = va_arg(arg, int);
+// 	ft_putnbr_fd(d, 1);
+// 	str_num = ft_itoa(d);
+// 	len = ft_strlen(str_num);
+// 	free(str_num);
+// 	return (len);
+// }
+
+int	format_d(int d)
 {
-	int		d;
 	char	*str_num;
 	int		len;
 
-	d = va_arg(arg, int);
 	ft_putnbr_fd(d, 1);
 	str_num = ft_itoa(d);
 	len = ft_strlen(str_num);
@@ -74,4 +86,10 @@ int	format_u(va_list arg)
 	len2 = ft_strlen(str_num2);
 	free(str_num2);
 	return (len2);
+}
+
+int	format_percentage(void)
+{
+	ft_putchar_fd('%', 1);
+	return (1);
 }

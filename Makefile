@@ -11,7 +11,8 @@ RM = rm -rf
 SRC = 	ft_printf.c \
 		ft_uitoa.c \
 		ft_printf_hexadecimal.c \
-		ft_printf_csdiu.c
+		ft_printf_csdiu_percent.c \
+		ft_printf_bonus.c
 
 OBJ = $(SRC:.c=.o)
 

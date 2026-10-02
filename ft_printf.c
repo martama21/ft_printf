@@ -10,33 +10,69 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
+// #include <stdio.h>
+// #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdarg.h>//para va_list ...
-#include <stdio.h>//pal printf
-#include <stdint.h>// para uintptr_t
-#include <stdlib.h>//para malloc y free
+// #include <stdarg.h>//para va_list ...
+// #include <stdio.h>//pal printf
+// #include <stdint.h>// para uintptr_t
+// #include <stdlib.h>//para malloc y free
 
-int	check_conversions(char type, va_list arg)
+// int	check_conversions(char type, va_list arg)
+// {
+// 	int	len;
+
+// 	len = 0;
+// 	if (type == 'c')
+// 		len = format_c(arg);
+// 	if (type == 'd' || type == 'i')
+// 		len = format_d(arg);
+// 	if (type == 'u')
+// 		len = format_u(arg);
+// 	if (type == 's')
+// 		len = format_s(arg);
+// 	if (type == 'p')
+// 		len = format_p(va_arg(arg, void *));
+// 	if (type == 'x')
+// 		len = format_x(arg);
+// 	if (type == 'X')
+// 		len = format_x_capital(arg);
+// 	return (len);
+// }
+
+int	check_conversions(char *format, int *i, va_list arg)
 {
 	int	len;
 
 	len = 0;
-	if (type == 'c')
+	if (format[*i] == 'c')
 		len = format_c(arg);
-	if (type == 'd' || type == 'i')
-		len = format_d(arg);
-	if (type == 'u')
+	if (format[*i] == 'd' || format[*i] == 'i')
+		len = format_d(va_arg(arg, int));
+		//len = format_d(arg);
+	if (format[*i] == 'u')
 		len = format_u(arg);
-	if (type == 's')
+	if (format[*i] == 's')
 		len = format_s(arg);
-	if (type == 'p')
+	if (format[*i] == 'p')
 		len = format_p(va_arg(arg, void *));
-	if (type == 'x')
+	if (format[*i] == 'x')
 		len = format_x(arg);
-	if (type == 'X')
+	if (format[*i] == 'X')
 		len = format_x_capital(arg);
+	if (format[*i] == '%')
+		len = format_percentage();
+	if (format[*i] == '#' || format[*i] == ' ' || format[*i] == '+')
+	{
+		len = format_bonus(arg, format[*i], format[(*i) + 1]);
+		*i += 1;
+	}
+	// if (format[*i] == '#')
+	// 	len = format_asterisk(arg);
+	// if (format[i] == ' ')
+	// 	len = format_space(arg);
+	// if (format[i] == '+')
+	// 	len = format_plus(arg);
 	return (len);
 }
 
@@ -61,6 +97,32 @@ int	len_without_conversions(char *format)
 	return (len);
 }
 
+// int	do_conversions(char *format, va_list arg_ptr, int *length_out)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (format[i] != '\0')
+// 	{
+// 		if (format[i] == '%')
+// 		{
+// 			if (format[i + 1] == '%')
+// 			{
+// 				*length_out += 1;
+// 				ft_putchar_fd('%', 1);
+// 			}
+// 			else
+// 				*length_out += check_conversions(format[i + 1], arg_ptr);
+// 			i++;
+// 		}
+// 		else
+// 			ft_putchar_fd(format[i], 1);
+// 		i++;
+// 	}
+// 	*length_out += len_without_conversions(format);
+// 	return (*length_out);
+// }
+
 int	do_conversions(char *format, va_list arg_ptr, int *length_out)
 {
 	int	i;
@@ -70,22 +132,55 @@ int	do_conversions(char *format, va_list arg_ptr, int *length_out)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == '%')
-			{
-				*length_out += 1;
-				ft_putchar_fd('%', 1);
-			}
-			else
-				*length_out += check_conversions(format[i + 1], arg_ptr);
+			//*length_out += check_conversions(format[i + 1], arg_ptr);
 			i++;
+			*length_out += check_conversions(format, &i, arg_ptr);
 		}
 		else
+		{
 			ft_putchar_fd(format[i], 1);
+			*length_out += 1;
+		}
 		i++;
 	}
-	*length_out += len_without_conversions(format);
+	//*length_out += len_without_conversions(format);
 	return (*length_out);
 }
+
+int	check_bonus(char *format, int *i)
+{
+	if (format[*i + 1] == '#')
+	{
+		if (format[*i + 2] != 'x' && format[*i + 2] != 'X')
+			return (-1);
+	}
+	if (format[*i + 1] == ' ' || format[*i + 1] == '+')
+	{
+		if (format[*i + 2] != 'd' && format[*i + 2] != 'i')
+			return (-1);
+	}
+	*i += 1;
+	return (0);
+}
+
+// int	good_conversions(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (str[i] != '\0')
+// 	{
+// 		if (str[i] == '%')
+// 		{
+// 			if (str[i + 1] && ft_strchr("cspdiuxX%", str[i + 1]))
+// 				i++;
+// 			else
+// 				return (-1);
+// 		}
+// 		i++;
+// 	}
+// 	return (1);
+// }
 
 int	good_conversions(char *str)
 {
@@ -96,8 +191,12 @@ int	good_conversions(char *str)
 	{
 		if (str[i] == '%')
 		{
-			if (str[i + 1] && ft_strchr("cspdiuxX%", str[i + 1]))
+			if (str[i + 1] && ft_strchr("cspdiuxX%# +", str[i + 1]))
+			{
+				if (check_bonus(str, &i) < 0)
+					return (-1);
 				i++;
+			}
 			else
 				return (-1);
 		}
@@ -118,6 +217,56 @@ int	ft_printf(char const *format, ...)
 	do_conversions((char *)format, arg_ptr, &len_out);
 	va_end(arg_ptr);
 	return (len_out);
+}
+
+int	main(void)
+{
+	int				i;
+	int				len;
+	//unsigned int	hex;
+
+	i = -23;
+	len = printf("(%%#x) original (%d): (%#x)", -23, -23);
+	printf(" | len: %d\n", len);
+	len = ft_printf("(%%#x) MIOginal (%d): (%#x)", -23, -23);
+	printf(" | len: %d\n", len);
+	printf("------------------\n");
+	len = printf("(%%#x) original (%d): (%#x)", 23, 23);
+	printf(" | len: %d\n", len);
+	len = ft_printf("(%%#x) MIOginal (%d): (%#x)", 23, 23);
+	printf(" | len: %d\n", len);
+	printf("------------------\n");
+	len = printf("(%%#X) original (%d): (%#X)", -23, -23);
+	printf(" | len: %d\n", len);
+	len = ft_printf("(%%#X) MIOginal (%d): (%#X)", -23, -23);
+	printf(" | len: %d\n", len);
+	printf("------------------\n");
+	len = printf("(%%#X) original (%d): (%#X)", 23, 23);
+	printf(" | len: %d\n", len);
+	len = ft_printf("(%%#X) MIOginal (%d): (%#X)", 23, 23);
+	printf(" | len: %d\n", len);
+	printf("------------------\n");
+
+	len = printf("(%% d) || (%% i) original (%d): (% d)", -23, -23);
+	printf(" | len: %d\n", len);
+	len = ft_printf("(%% d) || (%% i) MIOginal (%d): (% d)", -23, -23);
+	printf(" | len: %d\n", len);
+	printf("------------------\n");
+	len = printf("(%% d) || (%% i) original (%d): (% d)", 23, 23);
+	printf(" | len: %d\n", len);
+	len = ft_printf("(%% d) || (%% i) MIOginal (%d): (% d)", 23, 23);
+	printf(" | len: %d\n", len);
+	printf("------------------\n");
+	len = printf("(%%+d) || (%%+i) original (%d): (%+i)", 23, 23);
+	printf(" | len: %d\n", len);
+	len = ft_printf("(%%+d) || (%%+i) MIOginal (%d): (%+i)", 23, 23);
+	printf(" | len: %d\n", len);
+	printf("------------------\n");
+	len = printf("(%%+d) || (%%+i) original (%d): (%+i)", -23,-23);
+	printf(" | len: %d\n", len);
+	len = ft_printf("(%%+d) || (%%+i) MIOginal (%d): (%+i)", -23,-23);
+	printf(" | len: %d\n", len);
+	return (0);
 }
 
 // int	main(void)

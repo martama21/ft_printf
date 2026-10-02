@@ -10,15 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+// #include "libft/libft.h"
 #include "ft_printf.h"
-#include <stdarg.h>//para las macros de _va_..
-#include <stdint.h>// para uintptr_t
+// #include <stdarg.h>//para las macros de _va_..
+// #include <stdint.h>// para uintptr_t
 
-static char	hexadigit(int d)
+char	hexadigit(int d)
 {
 	char	c;
 
+	c = 0;
 	if (d == 10)
 		c = 'a';
 	else if (d == 11)
@@ -36,7 +37,7 @@ static char	hexadigit(int d)
 	return (c);
 }
 
-static void	put_hexadecimal(uintptr_t n, int (*f)(int c))
+void	put_hexadecimal(uintptr_t n, int (*f)(int c))
 {
 	if (n >= 16)
 	{
